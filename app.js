@@ -7,10 +7,18 @@ var util = require('util');
 var Config = require('./config.js'),
     conf = new Config();
 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 debug("initialized: %s", conf.url);
 
 app.use(bodyParser.json());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  next();
+});
+
 
 app.post('/notify', function (req, res) {
   debug('req body: %s', util.inspect(req.body));
