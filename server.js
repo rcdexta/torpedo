@@ -7,7 +7,7 @@ var util = require('util');
 var Config = require('./config.js'),
     conf = new Config();
 
-server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 9000);
 debug("initialized: %s", conf.url);
 
 app.use(bodyParser.json());
